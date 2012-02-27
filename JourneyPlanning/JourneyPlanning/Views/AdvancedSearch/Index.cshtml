@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>
+</head>
+<body>
+    @using (Html.BeginForm("Search", "AdvancedSearch", FormMethod.Post, new Dictionary<string, object> { { "class", "form-horizontal" } }))
+    {
+        <noscript>
+            <input type="hidden" name="ScriptDisabled" id="ScriptDisabled" value="true" />
+        </noscript>
+        <div class="container">
+            <h1>Advanced Search</h1>
+            <div class="well">
+            <fieldset>
+                <legend class="border"><b>Where do you want to go?</b></legend>
+                <div class="control-group">
+                    <label class="control-label" for="OriginStation">Leaving from</label>
+                    <div class="controls">
+                        <input type="text" name="OriginStation" id="OriginStation" autocomplete="off" class="input-medium" placeholder="Origin station" />
+                    </div>
+                </div>
+                <div class="control-group">                
+                    <label class="control-label" for="DestinationStation">Leaving to</label>
+                    <div class="controls">
+                        <input type="text" name="DestinationStation" id="DestinationStation" autocomplete="off" class="input-medium" placeholder="Destination station" />
+                    </div>
+                </div>
+            </fieldset>
+            </div>
+        </div>
+    }
+</body>
+</html>
