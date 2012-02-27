@@ -1,0 +1,6 @@
+[bB]in/
+obj/
+[dD]ebug/
+[rR]elease/
+*.suo
+_Re[sS]harper.*/
