@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Ttl.Web.JourneyPlanning.Models.AdvancedSearchModel
+@{
     Layout = null;
 }
 
@@ -8,8 +9,14 @@
 <head>
     <title></title>
     <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/jquery-1.4.4.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.17.js")" type="text/javascript"></script>
+    <!--script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script-->
+    <script src="@Url.Content("~/Scripts/AdvancedSearch.js")" type="text/javascript"></script>
 </head>
 <body>
     @using (Html.BeginForm("Search", "AdvancedSearch", FormMethod.Post, new Dictionary<string, object> { { "class", "form-horizontal" } }))
@@ -20,22 +27,67 @@
         <div class="container">
             <h1>Advanced Search</h1>
             <div class="well">
-            <fieldset>
-                <legend class="border"><b>Where do you want to go?</b></legend>
-                <div class="control-group">
-                    <label class="control-label" for="OriginStation">Leaving from</label>
-                    <div class="controls">
-                        <input type="text" name="OriginStation" id="OriginStation" autocomplete="off" class="input-medium" placeholder="Origin station" />
+                <fieldset>
+                    <legend class="border"><b>Where do you want to go?</b></legend>
+                    <div class="control-group">
+                        <label class="control-label" for="OriginStation">Leaving from</label>
+                        <div class="controls">
+                            <input type="text" name="OriginStation" id="OriginStation" autocomplete="off" class="input-medium" placeholder="Origin station" value="@Model.OriginStation" />
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">                
-                    <label class="control-label" for="DestinationStation">Leaving to</label>
-                    <div class="controls">
-                        <input type="text" name="DestinationStation" id="DestinationStation" autocomplete="off" class="input-medium" placeholder="Destination station" />
+                    <div class="control-group">                
+                        <label class="control-label" for="DestinationStation">Leaving to</label>
+                        <div class="controls">
+                            <input type="text" name="DestinationStation" id="DestinationStation" autocomplete="off" class="input-medium" placeholder="Destination station" />
+                        </div>
                     </div>
-                </div>
-            </fieldset>
+                </fieldset>
             </div>
+            <hr />
+            <div class="well">
+                <fieldset>
+                    <legend class="border"><b>When do you want to travel?</b></legend>
+                    <div class="control-group">
+                        <label class="control-label" for="outwardDate">Outward date</label>
+                        <div class="controls">
+                            <input type="text" name="outwardDate" id="outwardDate" autocomplete="off" class="input-medium datepicker" placeholder="Outward date (DD/MM/YYYY)" />
+                        </div>
+                    </div>
+                    <div class="control-group">                
+                        <label class="control-label" for="returnDate">Return date</label>
+                        <div class="controls">
+                            <input type="text" name="returnDate" id="returnDate" autocomplete="off" class="input-medium datepicker" placeholder="Return date (DD/MM/YYYY)" />
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <hr />
+            <div class="well">
+                <fieldset>
+                    <legend class="border"><b>Number of passengers</b></legend>
+                    <div class="row">
+                        <div class="control-group span6">
+                            <label class="control-label" for="AdultsTravelling">Adults</label>
+                            <div class="controls">
+                                @Html.DropDownList("AdultsTravelling", Model.AdultsTravelling, new Dictionary<string, object> { { "class", "input-small" } })
+                            </div>
+                        </div>
+                        <div class="control-group span6">
+                            <label class="control-label" for="ChildrenTravelling" title="Children between the age of 5 and 15">Children (5-15 years)</label>
+                            <div class="controls">
+                                @Html.DropDownList("ChildrenTravelling", Model.ChildrenTravelling, new Dictionary<string, object> { { "class", "input-small" } })
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <hr />
+            <div class="control-group right">
+                <div class="controls">
+                    <input type="submit" id="advancedSearch" name="advancedSearch" value="AdvancedSearch" class="btn-primary"/>
+                </div>
+            </div>
+            <hr />
         </div>
     }
 </body>

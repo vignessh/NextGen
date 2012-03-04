@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Ttl.Web.JourneyPlanning.Models;
 
 namespace Ttl.Web.JourneyPlanning.Controllers
 {
@@ -6,11 +7,16 @@ namespace Ttl.Web.JourneyPlanning.Controllers
     {
         //
         // GET: /AdvancedSearch/
-
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View(new AdvancedSearchModel());
         }
 
+        [HttpPost]
+        public ActionResult Search()
+        {
+            return null;
+        }
     }
 }
