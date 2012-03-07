@@ -25,7 +25,10 @@
             <input type="hidden" name="ScriptDisabled" id="ScriptDisabled" value="true" />
         </noscript>
         <div class="container">
-            <h1>Advanced Search</h1>
+            <div class="row">
+                <h1>Advanced Search</h1>
+                <p>Welcome. Please use the form below to plan your journey</p>
+            </div>
             <div class="well">
                 <fieldset>
                     <legend class="border"><b>Where do you want to go?</b></legend>
@@ -43,7 +46,6 @@
                     </div>
                 </fieldset>
             </div>
-            <hr />
             <div class="well">
                 <fieldset>
                     <legend class="border"><b>When would you like to travel?</b></legend>
@@ -71,7 +73,6 @@
                     </div>
                 </fieldset>
             </div>
-            <hr />
             <div class="">
                 <fieldset>
                     <legend class="border"><b>Number of passengers</b></legend>
@@ -95,7 +96,29 @@
                     </div>
                 </fieldset>
             </div>
-            <hr />
+            <div class="">
+                <fieldset>
+                    <legend class="border"><b>Railcards and other discounts (optional)</b></legend>
+                    <div class="row">
+                        <div class="span6">
+                            <div class="control-group">
+                                <label class="control-label" for="railCard">Railcard</label>
+                                <div class="controls">
+                                    @Html.DropDownList("RailCards", Model.AllowedRailCards, new Dictionary<string, object>{{"class", "input-xlarge"}})
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="control-group">
+                                <label class="control-label" for="numberOfRailCards">How many?</label>
+                                <div class="controls">
+                                    @Html.DropDownList("RailCards", Model.NumberOfRailCards, new Dictionary<string, object>{{"class", "input-mini"}})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
             <div class="row">
                 <div class="span7">&nbsp;</div>
                 <div class="span5">
@@ -106,7 +129,6 @@
                     </div>
                 </div>
             </div>
-            <hr />
         </div>
     }
 </body>

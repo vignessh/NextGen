@@ -36,5 +36,27 @@ namespace Ttl.Web.JourneyPlanning.Models
         {
             get { return GenerateListItems.Invoke(0, 6); }
         }
+
+        public IEnumerable<SelectListItem> NumberOfRailCards
+        {
+            get { return GenerateListItems.Invoke(0, 8); }
+        }
+
+        public IEnumerable<SelectListItem> AllowedRailCards
+        {
+            get 
+            { 
+                return new[]
+                             {
+                                 new SelectListItem {Value = "None", Text = "None", Selected = true},
+                                 new SelectListItem {Value = "YNG", Text = "16-25 RAILCARD"},
+                                 new SelectListItem {Value = "NGC", Text = "ANNUAL GOLD CARD"},
+                                 new SelectListItem {Value = "DIS", Text = "DISABLED ADULT RAILCARD"},
+                                 new SelectListItem {Value = "DIC", Text = "DISABLED CHILD RAILCARD"},
+                                 new SelectListItem {Value = "FAM", Text = "FAMILY AND FRIENDS RAILCARD"},
+
+                             }; 
+            }
+        }
     }
 }
