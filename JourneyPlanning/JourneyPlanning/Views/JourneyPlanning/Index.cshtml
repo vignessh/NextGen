@@ -19,7 +19,7 @@
     <script src="@Url.Content("~/Scripts/AdvancedSearch.js")" type="text/javascript"></script>
 </head>
 <body>
-    @using (Html.BeginForm("Search", "AdvancedSearch", FormMethod.Post, new Dictionary<string, object> { { "class", "form-horizontal" } }))
+    @using (Html.BeginForm("Search", "JourneyPlanning", FormMethod.Post, new Dictionary<string, object> { { "class", "form-horizontal" } }))
     {
         <noscript>
             <input type="hidden" name="ScriptDisabled" id="ScriptDisabled" value="true" />
@@ -35,13 +35,15 @@
                     <div class="control-group">
                         <label class="control-label" for="OriginStation">Leaving from</label>
                         <div class="controls">
-                            <input type="text" name="OriginStation" id="OriginStation" autocomplete="off" class="input-medium" placeholder="Origin station" value="@Model.OriginStation" />
+                            @Html.TextBoxFor(model => model.OriginStation, new Dictionary<string, object> { { "class", "input-medium" }, { "placeholder", "Origin station" }, {"autocomplete", "off"} })
+                            @Html.ValidationMessageFor(model => model.OriginStation)
                         </div>
                     </div>
                     <div class="control-group">                
                         <label class="control-label" for="DestinationStation">Leaving to</label>
                         <div class="controls">
-                            <input type="text" name="DestinationStation" id="DestinationStation" autocomplete="off" class="input-medium" placeholder="Destination station" />
+                            @Html.TextBoxFor(model => model.DestinationStation, new Dictionary<string, object> { { "class", "input-medium" }, { "placeholder", "Destination station" }, { "autocomplete", "off" } })
+                            @Html.ValidationMessageFor(model => model.DestinationStation)
                         </div>
                     </div>
                 </fieldset>
@@ -52,7 +54,7 @@
                     <div class="control-group" id="outwardDateDiv">
                         <label class="control-label" for="outwardDate">Outward date</label>
                         <div class="controls">
-                            <input type="text" name="outwardDate" id="outwardDate" autocomplete="off" class="input-medium datepicker" placeholder="Date (dd/mm/yy)" />
+                            @Html.TextBoxFor(model => model.OutwardDate, new Dictionary<string, object> { { "class", "input-medium datepicker" }, { "placeholder", "Date (dd/mm/yy)" }, { "autocomplete", "off" } })
                         </div>
                     </div>
                     <div class="control-group" id="journeyTypeDiv">
@@ -68,7 +70,7 @@
                     <div class="control-group" id="returnDateDiv">
                         <label class="control-label" for="returnDate">Return date</label>
                         <div class="controls">
-                            <input type="text" name="returnDate" id="returnDate" autocomplete="off" class="input-medium datepicker" placeholder="Date (dd/mm/yy)" />
+                            @Html.TextBoxFor(model => model.ReturnDate, new Dictionary<string, object> { { "class", "input-medium datepicker" }, { "placeholder", "Date (dd/mm/yy)" }, { "autocomplete", "off" } })
                         </div>
                     </div>
                 </fieldset>
@@ -81,7 +83,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="AdultsTravelling">Adults</label>
                                 <div class="controls">
-                                    @Html.DropDownList("AdultsTravelling", Model.AdultsTravelling, new Dictionary<string, object> { { "class", "input-mini" } })
+                                    @Html.DropDownListFor(model => model.NumberOfAdults, Model.AdultsTravelling, new Dictionary<string, object> { { "class", "input-mini" } })
                                 </div>
                             </div>
                         </div>
@@ -89,7 +91,37 @@
                             <div class="control-group">
                                 <label class="control-label" for="ChildrenTravelling" title="Children between the age of 5 and 15">Children (5-15 years)</label>
                                 <div class="controls">
-                                    @Html.DropDownList("ChildrenTravelling", Model.ChildrenTravelling, new Dictionary<string, object> { { "class", "input-mini" } })
+                                    @Html.DropDownListFor(model => model.NumberOfChildren, Model.ChildrenTravelling, new Dictionary<string, object> { { "class", "input-mini" } })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="well">
+                <fieldset>
+                    <legend class="border"><b>Extra journey requirements (optional)</b></legend>
+                    <div class="row">
+                        <div class="span6">
+                            <div class="control-group">
+                                <label class="control-label" for="ServiceType">Journey options</label>
+                                <div class="controls">
+                                    @Html.DropDownListFor(model => model.ServiceType, Model.AllJourneyOptions, new Dictionary<string, object>{{"class", "input-xlarge"}})
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="control-group">
+                                <label class="control-label" for="RouteRestriction">Go via or avoid</label>
+                                <div class="controls">
+                                    @Html.DropDownListFor(model => model.RouteRestriction, Model.AllRouteRestrictions, new Dictionary<string, object> { { "class", "input-xlarge" } })
+                                </div>
+                            </div>
+                            <div class="control-group">                
+                                <label class="control-label" for="ViaAvoidStation">this station</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(model => model.ViaAvoidStation, new Dictionary<string, object> { { "class", "input-medium" }, { "autocomplete", "off" } })
+                                    @Html.ValidationMessageFor(model => model.ViaAvoidStation)
                                 </div>
                             </div>
                         </div>
@@ -102,9 +134,10 @@
                     <div class="row">
                         <div class="span6">
                             <div class="control-group">
-                                <label class="control-label" for="railCard">Railcard</label>
+                                <label class="control-label" for="RailCard1">Railcard</label>
                                 <div class="controls">
-                                    @Html.DropDownList("RailCards", Model.AllowedRailCards, new Dictionary<string, object>{{"class", "input-xlarge"}})
+                                    @Html.DropDownListFor(model => model.RailCard1, Model.AllowedRailCards, new Dictionary<string, object>{{"class", "input-xlarge"}})
+@*                                    @Html.DropDownList("RailCards", Model.AllowedRailCards, new Dictionary<string, object>{{"class", "input-xlarge"}})*@
                                 </div>
                             </div>
                         </div>

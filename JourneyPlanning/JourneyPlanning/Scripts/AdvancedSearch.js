@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#outwardDate").datepicker({
+    $("#OutwardDate").datepicker({
         numberOfMonths: 2,
         minDate: 0,
         maxDate: +91,
@@ -7,7 +7,7 @@
         defaultDate: null
     });
 
-    $("#returnDate").datepicker({
+    $("#ReturnDate").datepicker({
         numberOfMonths: 2,
         minDate: 0,
         maxDate: +91,
@@ -21,5 +21,64 @@
             $("#returnDateDiv").show();
         else
             $("#returnDateDiv").hide();
+    });
+
+    $("#OriginStation").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                type: "GET",
+                //contentType: "application/json; charset=utf-8",
+                url: "/JourneyPlanning/PredictiveSearch?keywordStartsWith=" + request.term,
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    response(data);
+                },
+                error: function (result) {
+                    alert("Due to unexpected errors we were unable to load data");
+                }
+            });
+        },
+        minLength: 3
+    });
+
+    $("#DestinationStation").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                type: "GET",
+                //contentType: "application/json; charset=utf-8",
+                url: "/JourneyPlanning/PredictiveSearch?keywordStartsWith=" + request.term,
+                //data: "{'keywordStartsWith':'" + request.term + "'}",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    response(data);
+                },
+                error: function (result) {
+                    alert("Due to unexpected errors we were unable to load data");
+                }
+            });
+        },
+        minLength: 3
+    });
+
+    $("#ViaAvoidStation").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                type: "GET",
+                //contentType: "application/json; charset=utf-8",
+                url: "/JourneyPlanning/PredictiveSearch?keywordStartsWith=" + request.term,
+                //data: "{'keywordStartsWith':'" + request.term + "'}",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    response(data);
+                },
+                error: function (result) {
+                    alert("Due to unexpected errors we were unable to load data");
+                }
+            });
+        },
+        minLength: 3
     });
 });
