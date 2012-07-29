@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JourneyPlanning", "JourneyPlanning\JourneyPlanning.csproj", "{D271F988-0EE4-4B59-A654-23796DF19CA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JourneyPlanning", "JourneyPlanning\JourneyPlanning.csproj", "{EA27A243-AAD9-40B9-A2CB-0A5ECBF57FDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D271F988-0EE4-4B59-A654-23796DF19CA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D271F988-0EE4-4B59-A654-23796DF19CA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D271F988-0EE4-4B59-A654-23796DF19CA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D271F988-0EE4-4B59-A654-23796DF19CA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA27A243-AAD9-40B9-A2CB-0A5ECBF57FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA27A243-AAD9-40B9-A2CB-0A5ECBF57FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA27A243-AAD9-40B9-A2CB-0A5ECBF57FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA27A243-AAD9-40B9-A2CB-0A5ECBF57FDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

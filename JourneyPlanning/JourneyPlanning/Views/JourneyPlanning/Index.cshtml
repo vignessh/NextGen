@@ -8,15 +8,16 @@
 <html>
 <head>
     <title>Advanced Search - Search for train tickets</title>
-    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
-    <script src="@Url.Content("~/Scripts/jquery-1.4.4.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.17.js")" type="text/javascript"></script>
-    <!--script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script-->
+    <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.22.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/AdvancedSearch.js")" type="text/javascript"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
     @using (Html.BeginForm("Search", "JourneyPlanning", FormMethod.Post, new Dictionary<string, object> { { "class", "form-horizontal" } }))
@@ -51,31 +52,76 @@
             <div class="well">
                 <fieldset>
                     <legend class="border"><b>When would you like to travel?</b></legend>
-                    <div class="control-group" id="outwardDateDiv">
-                        <label class="control-label" for="outwardDate">Outward date</label>
-                        <div class="controls">
-                            @Html.TextBoxFor(model => model.OutwardDate, new Dictionary<string, object> { { "class", "input-medium datepicker" }, { "placeholder", "Date (dd/mm/yy)" }, { "autocomplete", "off" } })
+                    <div class="row" id="outwardDateDiv">
+                        <div class="span4 control-group">
+                            <label class="control-label" for="OutwardDate">Outward date</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.OutwardDate, new Dictionary<string, object> { { "class", "input-medium datepicker" }, { "placeholder", "Date (dd/mm/yy)" }, { "autocomplete", "off" } })
+                            </div>
+                        </div>
+                        <div class="span3 control-group">
+                            <label class="control-label" for="OutwardDepartureMode">Time</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.OutwardDepartureMode, Model.AllTravelModes, new Dictionary<string, object> {{"class", "input-small"}})
+                            </div>
+                            <label class="control-label" for="OutwardTravelHour">hr</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.OutwardTravelHour, Model.Hours, new Dictionary<string, object> {{"class", "input-mini"}})
+                            </div>
+                            <label class="control-label" for="OutwardTravelMinute">min</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.OutwardTravelMinute, Model.Minutes, new Dictionary<string, object> {{"class", "input-mini"}})
+                            </div>
+                        </div>
+@*                            <div class="row">*@
+@*                                <div class="span4">*@
+@*                                    @Html.DropDownListFor(model => model.OutwardDepartureMode, Model.AllTravelModes, new Dictionary<string, object> {{"class", "input-small"}})*@
+@*                                </div>*@
+@*                                <div class="span3">*@
+@*                                    @Html.DropDownListFor(model => model.OutwardTravelHour, Model.Hours, new Dictionary<string, object> {{"class", "input-mini"}})*@
+@*                                </div>*@
+@*                                <div class="span3">*@
+@*                                    @Html.DropDownListFor(model => model.OutwardTravelMinute, Model.Minutes, new Dictionary<string, object> {{"class", "input-mini"}})*@
+@*                                </div>*@
+@*                            </div>*@
+                    </div>
+                    <div class="row" id="journeyTypeDiv">
+                        <div class="span3 control-group">
+                            <label class="control-label" for="journeyType">Journey type</label>
+                            <div class="controls">
+                                <select class="input-small" id="journeyType" name="journeyType">
+                                    <option value="S" selected="selected">Single</option>
+                                    <option value="R">Return</option>
+                                    <option value="O">Open Return</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="control-group" id="journeyTypeDiv">
-                        <label class="control-label" for="journeyType">Journey type</label>
-                        <div class="controls">
-                            <select class="input-small" id="journeyType" name="journeyType">
-                                <option value="S" selected="selected">Single</option>
-                                <option value="R">Return</option>
-                                <option value="O">Open Return</option>
-                            </select>
+                    <div class="row hide" id="returnDateDiv">
+                        <div class="span4 control-group">
+                            <label class="control-label" for="returnDate">Return date</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.ReturnDate, new Dictionary<string, object> { { "class", "input-medium datepicker" }, { "placeholder", "Date (dd/mm/yy)" }, { "autocomplete", "off" } })
+                            </div>
                         </div>
-                    </div>
-                    <div class="control-group" id="returnDateDiv">
-                        <label class="control-label" for="returnDate">Return date</label>
-                        <div class="controls">
-                            @Html.TextBoxFor(model => model.ReturnDate, new Dictionary<string, object> { { "class", "input-medium datepicker" }, { "placeholder", "Date (dd/mm/yy)" }, { "autocomplete", "off" } })
+                        <div class="span3 control-group">
+                            <label class="control-label" for="ReturnDepartureMode">Time</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.ReturnDepartureMode, Model.AllTravelModes, new Dictionary<string, object> {{"class", "input-medium"}})
+                            </div>
+                            <label class="control-label" for="ReturnTravelHour">hr</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.ReturnTravelHour, Model.Hours, new Dictionary<string, object> {{"class", "input-mini"}})
+                            </div>
+                            <label class="control-label" for="ReturnTravelMinute">min</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.ReturnTravelMinute, Model.Minutes, new Dictionary<string, object> {{"class", "input-mini"}})
+                            </div>
                         </div>
                     </div>
                 </fieldset>
             </div>
-            <div class="">
+            <div class="well">
                 <fieldset>
                     <legend class="border"><b>Number of passengers</b></legend>
                     <div class="row">
@@ -128,7 +174,7 @@
                     </div>
                 </fieldset>
             </div>
-            <div class="">
+            <div class="well inline">
                 <fieldset>
                     <legend class="border"><b>Railcards and other discounts (optional)</b></legend>
                     <div class="row">
@@ -137,7 +183,6 @@
                                 <label class="control-label" for="RailCard1">Railcard</label>
                                 <div class="controls">
                                     @Html.DropDownListFor(model => model.RailCard1, Model.AllowedRailCards, new Dictionary<string, object>{{"class", "input-xlarge"}})
-@*                                    @Html.DropDownList("RailCards", Model.AllowedRailCards, new Dictionary<string, object>{{"class", "input-xlarge"}})*@
                                 </div>
                             </div>
                         </div>
@@ -145,7 +190,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="numberOfRailCards">How many?</label>
                                 <div class="controls">
-                                    @Html.DropDownList("RailCards", Model.NumberOfRailCards, new Dictionary<string, object>{{"class", "input-mini"}})
+                                    @Html.DropDownListFor(model => Model.NumberOfRailCards, Model.NumberOfRailCards, new Dictionary<string, object>{{"class", "input-mini"}})
                                 </div>
                             </div>
                         </div>
@@ -157,7 +202,7 @@
                 <div class="span5">
                     <div class="control-group">
                         <div class="controls">
-                            <input type="submit" id="advancedSearch" name="advancedSearch" value="Check fares and availability" class="btn-success"/>
+                            <input type="submit" id="advancedSearch" name="advancedSearch" value="Check fares and availability" class="btn-primary btn-large"/>
                         </div>
                     </div>
                 </div>
